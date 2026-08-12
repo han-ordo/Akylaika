@@ -1,0 +1,73 @@
+<div class="form-group">
+        <textarea id="messageInput" placeholder="Напиши всё, что захочешь..."></textarea>
+        <button class="send-btn" onclick="sendToTelegram()">Отправить</button>
+      </div>
+      <div class="status-msg" id="statusBox"></div>
+    </div>
+
+  </div>
+
+  <script>
+    // 1. Вставь сюда токен своего бота из @BotFather
+    const TELEGRAM_BOT_TOKEN = 'ВСТАВЬ_ТОКЕН_БОТА'; 
+
+    // 2. Вставь сюда свой ID из @userinfobot
+    const TELEGRAM_CHAT_ID = 'ВСТАВЬ_СВОЙ_CHAT_ID'; 
+
+    const phrases = [
+      "Ты обладаешь мощной энергией ✨",
+      "Твоя улыбка решает любые проблемы ☀️",
+      "Ты намного круче, чем сама думаешь 🚀",
+      "С тобой всегда комфортно и интересно 💭",
+      "Ты один из самых уникальных людей 👑"
+    ];
+
+    function getPhrase() {
+      const random = Math.floor(Math.random() * phrases.length);
+      document.getElementById('phraseBox').innerText = phrases[random];
+    }
+
+    async function sendToTelegram() {
+      const input = document.getElementById('messageInput');
+      const status = document.getElementById('statusBox');
+      const text = input.value.trim();
+
+      if (!text) {
+        status.style.color = '#ff4b72';
+        status.innerText = 'Сначала напиши сообщение!';
+        return;
+      }
+
+      status.style.color = '#ffffff';
+      status.innerText = 'Отправка...';
+
+      const payload = 📩 Сообщение от Акылай:\n\n"${text}";
+
+      try {
+        const response = await fetch(https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: payload
+          })
+        });
+
+        if (response.ok) {
+          status.style.color = '#4eff91';
+          status.innerText = 'Отправлено! ✨';
+          input.value = '';
+        } else {
+          throw new Error();
+        }
+      } catch (err) {
+        status.style.color = '#ff4b72';
+        status.innerText = 'Ошибка. Проверь токен и Chat ID.';
+      }
+    }
+  </script>
+</body>
+</html>
+<script>
+    const TELEGRAM_BOT_TOKEN = '8943229708:AAHbl9P-d4wdSgaYjebzTQj3w0mFv4oNXnQ'; 
+    const TELEGRAM_CHAT_ID = '7429348524';
