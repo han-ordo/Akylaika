@@ -1288,30 +1288,20 @@ footer {
 <div class="notification" id="notification"></div>
 
 <script>
-
 const form = document.getElementById("messageForm");
 const button = document.getElementById("sendButton");
 const notification = document.getElementById("notification");
 
-/*
-    СЮДА ПОТОМ ПОСТАВИМ АДРЕС ТВОЕГО CLOUDFLARE WORKER
-*/
-
 const WORKER_URL =
     "https://friend-messages.brawlstarsforever1488.workers.dev/";
 
+
 function showNotification(text, type) {
-
     notification.textContent = text;
-
-    notification.className =
-        "notification show " + type;
+    notification.className = "notification show " + type;
 
     setTimeout(() => {
-
-        notification.className =
-            "notification";
-
+        notification.className = "notification";
     }, 4000);
 }
 
@@ -1320,59 +1310,41 @@ form.addEventListener("submit", async function(e) {
 
     e.preventDefault();
 
-    const name =
-        document.getElementById("name").value.trim();
+    const nameInput = document.getElementById("name");
+    const messageInput = document.getElementById("message");
 
-    const message =
-        document.getElementById("message").value.trim();
+    const name = nameInput ? nameInput.value.trim() : "";
+    const message = messageInput ? messageInput.value.trim() : "";
 
     if (!name || !message) {
-
         showNotification(
-            "Заполни оба поля ✦",
+            "Заполни имя и сообщение ✦",
             "error"
         );
-
         return;
     }
 
     button.disabled = true;
-
-    button.textContent =
-        "Отправляем...";
-
+    button.textContent = "Отправляем...";
 
     try {
 
-        const response = await fetch(
-            WORKER_URL,
-            {
-                method: "POST",
+        const response = await fetch(WORKER_URL, {
+            method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                    body: JSON.stringify({
-                    name: name,
-                    message: message
-                })
-            }
-        );
+            headers: {
+                "Content-Type": "application/json"
+            },
 
+            body: JSON.stringify({
+                name: name,
+                message: message
+            })
+        });
 
         if (!response.ok) {
-
-            const errorText =
-                await response.text();
-
-            console.log(errorText);
-
-            throw new Error(
-                "Ошибка сервера: " +
-                response.status
-            );
+            throw new Error("Ошибка сервера: " + response.status);
         }
-
 
         showNotification(
             "Сообщение отправлено ✦",
@@ -1381,9 +1353,7 @@ form.addEventListener("submit", async function(e) {
 
         form.reset();
 
-    }
-
-    catch(error) {
+    } catch (error) {
 
         console.error(error);
 
@@ -1392,18 +1362,14 @@ form.addEventListener("submit", async function(e) {
             "error"
         );
 
-    }
-
-    finally {
+    } finally {
 
         button.disabled = false;
+        button.textContent = "Отправить сообщение";
 
-        button.textContent =
-            "Отправить сообщение";
     }
 
 });
-
 </script>
 
 </body>
