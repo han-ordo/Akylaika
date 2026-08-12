@@ -1289,47 +1289,33 @@ footer {
 
 <script>
 const form = document.getElementById("messageForm");
-const button = document.getElementById("sendButton");
-const notification = document.getElementById("notification");
 
 const WORKER_URL =
     "https://friend-messages.brawlstarsforever1488.workers.dev/";
 
-
-function showNotification(text, type) {
-    notification.textContent = text;
-    notification.className = "notification show " + type;
-
-    setTimeout(() => {
-        notification.className = "notification";
-    }, 4000);
-}
-
-
-form.addEventListener("submit", async function(e) {
-
+form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-   const nameInput = document.getElementById("name");
-const messageInput = document.getElementById("message");
+    const inputs = form.querySelectorAll("input, textarea");
 
-const name = nameInput ? nameInput.value.trim() : "";
-const message = messageInput ? messageInput.value.trim() : "";
+    const name = inputs[0]?.value || "";
+    const message = inputs[1]?.value || "";
 
-    if (!name || !message) {
-        showNotification(
-            "Заполни имя и сообщение ✦",
-            "error"
-        );
+    if (!name.trim() || !message.trim()) {
+        alert("Заполни оба поля ✦");
         return;
     }
 
-    button.disabled = true;
-    button.textContent = "Отправляем...";
-    
-console.log("КНОПКА СРАБОТАЛА");
-console.log("WORKER:", WORKER_URL);
+    const button = form.querySelector("button[type='submit']");
+
+    if (button) {
+        button.disabled = true;
+        button.textContent = "Отправляем...";
+    }
+
     try {
+        console.log("Отправляем сообщение...");
+        console.log("Worker:", WORKER_URL);
 
         const response = await fetch(WORKER_URL, {
             method: "POST",
@@ -1344,33 +1330,30 @@ console.log("WORKER:", WORKER_URL);
             })
         });
 
+        console.log("Worker response:", response.status);
+
         if (!response.ok) {
-            throw new Error("Ошибка сервера: " + response.status);
+            throw new Error("Worker returned " + response.status);
         }
 
-        showNotification(
-            "Сообщение отправлено ✦",
-            "success"
-        );
+        alert("Сообщение отправлено ✦");
 
         form.reset();
 
     } catch (error) {
+        console.error("Ошибка отправки:", error);
 
-        console.error(error);
-
-        showNotification(
-            "Не получилось отправить сообщение",
-            "error"
+        alert(
+            "Не удалось отправить сообщение.\n\n" +
+            "Ошибка: " + error.message
         );
 
     } finally {
-
-        button.disabled = false;
-        button.textContent = "Отправить сообщение";
-
+        if (button) {
+            button.disabled = false;
+            button.textContent = "Отправить сообщение";
+        }
     }
-
 });
 </script>
 
