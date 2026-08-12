@@ -1310,11 +1310,11 @@ form.addEventListener("submit", async function(e) {
 
     e.preventDefault();
 
-    const nameInput = document.getElementById("name");
-    const messageInput = document.getElementById("message");
+   const nameInput = document.getElementById("name");
+const messageInput = document.getElementById("message");
 
-    const name = nameInput ? nameInput.value.trim() : "";
-    const message = messageInput ? messageInput.value.trim() : "";
+const name = nameInput ? nameInput.value.trim() : "";
+const message = messageInput ? messageInput.value.trim() : "";
 
     if (!name || !message) {
         showNotification(
