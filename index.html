@@ -4,14 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Акылай ✨</title>
-
-<meta name="description" content="Небольшое особенное место">
+<title>Для Акылай</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+
+:root {
+    --cream: #f5efe5;
+    --paper: #fbf8f2;
+    --ink: #27221e;
+    --muted: #746b63;
+    --wine: #713d3d;
+    --wine-dark: #4d292b;
+    --line: rgba(39,34,30,.14);
+    --shadow: 0 25px 70px rgba(62,45,35,.13);
+}
+
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
@@ -20,406 +29,555 @@ html {
 }
 
 body {
-    min-height: 100vh;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-    background:
-        radial-gradient(circle at 20% 20%, rgba(126, 87, 255, .18), transparent 35%),
-        radial-gradient(circle at 80% 70%, rgba(255, 70, 150, .14), transparent 35%),
-        #08080d;
-    color: #fff;
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: "DM Sans", sans-serif;
     overflow-x: hidden;
 }
 
-/* Фоновые точки */
+/* ---------- CURSOR DECOR ---------- */
 
-.bg {
+.cursor-dot {
+    position: fixed;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--wine);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    opacity: .7;
+}
+
+/* ---------- INTRO ---------- */
+
+.intro {
     position: fixed;
     inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 0;
+    background: var(--wine-dark);
+    color: var(--cream);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease, visibility 1s ease;
 }
 
-.dot {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: rgba(255,255,255,.55);
-    border-radius: 50%;
-    animation: float 7s infinite ease-in-out;
+.intro.hide {
+    opacity: 0;
+    visibility: hidden;
 }
 
-.dot:nth-child(1) { left: 8%; top: 20%; animation-delay: 0s; }
-.dot:nth-child(2) { left: 20%; top: 70%; animation-delay: 1s; }
-.dot:nth-child(3) { left: 35%; top: 35%; animation-delay: 2s; }
-.dot:nth-child(4) { left: 52%; top: 80%; animation-delay: 3s; }
-.dot:nth-child(5) { left: 70%; top: 18%; animation-delay: 4s; }
-.dot:nth-child(6) { left: 88%; top: 60%; animation-delay: 5s; }
-.dot:nth-child(7) { left: 94%; top: 25%; animation-delay: 2s; }
-.dot:nth-child(8) { left: 45%; top: 12%; animation-delay: 4s; }
-
-@keyframes float {
-    0%,100% {
-        transform: translateY(0) scale(1);
-        opacity: .3;
-    }
-    50% {
-        transform: translateY(-30px) scale(1.8);
-        opacity: 1;
-    }
+.intro-inner {
+    text-align: center;
+    padding: 30px;
 }
 
-/* Навигация */
+.intro-small {
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-size: 11px;
+    opacity: .65;
+    margin-bottom: 25px;
+}
+
+.intro h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(55px, 12vw, 115px);
+    font-weight: 500;
+    margin: 0;
+}
+
+.intro-line {
+    width: 70px;
+    height: 1px;
+    background: rgba(245,239,229,.5);
+    margin: 30px auto;
+}
+
+.intro button {
+    border: 1px solid rgba(245,239,229,.45);
+    background: transparent;
+    color: var(--cream);
+    padding: 14px 28px;
+    border-radius: 100px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: .3s;
+}
+
+.intro button:hover {
+    background: var(--cream);
+    color: var(--wine-dark);
+}
+
+/* ---------- NAV ---------- */
 
 nav {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 22px 7%;
+    padding: 24px 5vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 20;
-    background: linear-gradient(
-        to bottom,
-        rgba(8,8,13,.9),
-        transparent
-    );
-    backdrop-filter: blur(8px);
+    z-index: 100;
+    mix-blend-mode: multiply;
 }
 
 .logo {
-    font-size: 19px;
-    font-weight: 700;
-    letter-spacing: 2px;
+    font-family: "Playfair Display", serif;
+    font-size: 22px;
 }
 
-.logo span {
-    color: #c78cff;
+.nav-right {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
 }
 
-.nav-btn {
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-    padding: 10px 18px;
-    border: 1px solid rgba(255,255,255,.15);
-    border-radius: 100px;
-    transition: .3s;
-}
-
-.nav-btn:hover {
-    background: rgba(255,255,255,.08);
-    border-color: rgba(255,255,255,.35);
-}
-
-/* Главный экран */
+/* ---------- HERO ---------- */
 
 .hero {
-    position: relative;
-    z-index: 1;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 110px 20px 70px;
+    display: grid;
+    place-items: center;
+    padding: 130px 7vw 80px;
+    position: relative;
 }
 
 .hero-content {
-    width: min(900px, 100%);
-    text-align: center;
-    animation: appear 1.2s ease;
-}
-
-@keyframes appear {
-    from {
-        opacity: 0;
-        transform: translateY(35px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 9px 16px;
-    border-radius: 100px;
-    border: 1px solid rgba(255,255,255,.12);
-    background: rgba(255,255,255,.04);
-    color: #cfcfe4;
-    font-size: 13px;
-    margin-bottom: 25px;
-}
-
-.badge::before {
-    content: "";
-    width: 7px;
-    height: 7px;
-    background: #b678ff;
-    border-radius: 50%;
-    box-shadow: 0 0 15px #b678ff;
-}
-
-h1 {
-    font-size: clamp(52px, 9vw, 105px);
-    line-height: .95;
-    letter-spacing: -5px;
-    margin-bottom: 28px;
-    background: linear-gradient(
-        120deg,
-        #fff,
-        #d7b8ff,
-        #ff9bd0,
-        #fff
-    );
-    background-size: 300%;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: gradient 7s ease infinite;
-}
-
-@keyframes gradient {
-    0%,100% { background-position: 0%; }
-    50% { background-position: 100%; }
-}
-
-.subtitle {
-    max-width: 600px;
-    margin: auto;
-    color: #a7a7b8;
-    font-size: 18px;
-    line-height: 1.7;
-}
-
-/* Кнопка */
-        .main-btn {
-    display: inline-flex;
-    margin-top: 40px;
-    padding: 16px 30px;
-    border-radius: 100px;
-    text-decoration: none;
-    color: white;
-    font-weight: 600;
-    background: linear-gradient(135deg, #8d55ff, #d84b9d);
-    box-shadow: 0 15px 50px rgba(151, 78, 255, .25);
-    transition: .35s;
-}
-
-.main-btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 70px rgba(151, 78, 255, .4);
-}
-
-/* Раздел */
-
-.section {
-    position: relative;
-    z-index: 1;
-    width: min(900px, 92%);
-    margin: auto;
-    padding: 100px 0;
-}
-
-.section-title {
-    text-align: center;
-    font-size: clamp(30px, 5vw, 50px);
-    margin-bottom: 15px;
-}
-
-.section-text {
-    text-align: center;
-    color: #888899;
-    line-height: 1.7;
-    margin-bottom: 45px;
-}
-
-/* Карточки */
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-}
-
-.card {
-    min-height: 190px;
-    padding: 28px;
-    border: 1px solid rgba(255,255,255,.09);
-    border-radius: 24px;
-    background: rgba(255,255,255,.035);
-    backdrop-filter: blur(15px);
-    transition: .35s;
-}
-
-.card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(190,130,255,.4);
-    background: rgba(255,255,255,.06);
-}
-
-.card-icon {
-    font-size: 28px;
-    margin-bottom: 25px;
-}
-
-.card h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.card p {
-    color: #888899;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-/* Форма */
-
-.message-box {
-    padding: 35px;
-    border-radius: 30px;
-    border: 1px solid rgba(255,255,255,.1);
-    background: rgba(255,255,255,.045);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 30px 100px rgba(0,0,0,.25);
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
-    color: #c8c8d8;
-    font-size: 14px;
-}
-
-input,
-textarea {
+    max-width: 1050px;
     width: 100%;
-    border: 1px solid rgba(255,255,255,.1);
-    background: rgba(0,0,0,.25);
-    color: white;
-    border-radius: 16px;
-    padding: 16px;
-    outline: none;
-    font: inherit;
-    transition: .3s;
+    text-align: center;
 }
 
-input:focus,
-textarea:focus {
-    border-color: #a76bff;
-    box-shadow: 0 0 0 4px rgba(167,107,255,.08);
+.eyebrow {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: var(--wine);
+    margin-bottom: 25px;
 }
 
-textarea {
-    min-height: 150px;
-    resize: vertical;
+.hero h1 {
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
+    font-size: clamp(65px, 12vw, 150px);
+    line-height: .9;
+    margin: 0;
+    letter-spacing: -4px;
 }
 
-.form-row {
+.hero h1 em {
+    font-weight: 500;
+}
+
+.hero-sub {
+    max-width: 550px;
+    margin: 40px auto 0;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.scroll {
+    margin-top: 70px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--muted);
+}
+
+.scroll span {
+    display: block;
+    width: 1px;
+    height: 45px;
+    background: var(--line);
+    margin: 15px auto 0;
+}
+
+/* ---------- GENERAL ---------- */
+
+section {
+    padding: 130px 7vw;
+}
+
+.section-inner {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.section-label {
+    color: var(--wine);
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 4px;
     margin-bottom: 22px;
 }
 
-.send-btn {
+.section-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(42px, 6vw, 75px);
+    line-height: 1;
+    font-weight: 500;
+    margin: 0;
+}
+
+.divider {
     width: 100%;
-    border: none;
-    padding: 17px;
-    border-radius: 16px;
-    color: white;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    background: linear-gradient(135deg,#8d55ff,#d84b9d);
-    transition: .3s;
+    height: 1px;
+    background: var(--line);
+    margin: 55px 0;
+}
+/* ---------- LETTER ---------- */
+
+.letter-section {
+    background: var(--paper);
 }
 
-.send-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 40px rgba(153,75,255,.25);
+.letter-grid {
+    display: grid;
+    grid-template-columns: .8fr 1.4fr;
+    gap: 80px;
+    align-items: start;
 }
 
-.send-btn:disabled {
-    opacity: .6;
-    cursor: wait;
+.letter-note {
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 14px;
 }
 
-/* Уведомление */
+.letter {
+    background: #fffdf8;
+    padding: clamp(35px, 6vw, 75px);
+    box-shadow: var(--shadow);
+    position: relative;
+    transform: rotate(-.5deg);
+}
 
-.notification {
-    position: fixed;
-    left: 50%;
-    bottom: 25px;
-    transform: translate(-50%, 130px);
-    width: min(430px, calc(100% - 30px));
-    padding: 18px 22px;
-    border-radius: 18px;
-    background: rgba(25,25,34,.95);
-    border: 1px solid rgba(255,255,255,.12);
-    backdrop-filter: blur(20px);
-    text-align: center;
-    z-index: 100;
-    opacity: 0;
+.letter:before {
+    content: "";
+    position: absolute;
+    inset: 15px;
+    border: 1px solid rgba(113,61,61,.13);
+    pointer-events: none;
+}
+
+.letter h2 {
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
+    font-size: 40px;
+    margin-top: 0;
+}
+
+.letter p {
+    color: #625951;
+    line-height: 2;
+    font-size: 15px;
+}
+
+.signature {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-size: 27px;
+    color: var(--wine);
+    margin-top: 40px;
+}
+
+/* ---------- WORDS ---------- */
+
+.words {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+    margin-top: 60px;
+}
+
+.word-card {
+    padding: 35px 28px;
+    border: 1px solid var(--line);
+    min-height: 210px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     transition: .4s;
 }
 
-.notification.show {
-    transform: translate(-50%, 0);
-    opacity: 1;
+.word-card:hover {
+    transform: translateY(-8px);
+    background: var(--paper);
+    box-shadow: var(--shadow);
 }
 
-.notification.success {
-    border-color: rgba(130,255,180,.3);
+.word-number {
+    color: var(--wine);
+    font-size: 12px;
 }
 
-.notification.error {
-    border-color: rgba(255,100,120,.3);
+.word-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 27px;
+    font-weight: 500;
 }
 
-/* Футер */
+.word-card p {
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+/* ---------- QUOTE ---------- */
+
+.quote-section {
+    background: var(--wine-dark);
+    color: var(--cream);
+    text-align: center;
+}
+
+.quote {
+    max-width: 900px;
+    margin: auto;
+}
+
+.quote-mark {
+    font-family: "Playfair Display", serif;
+    font-size: 80px;
+    opacity: .35;
+    line-height: .5;
+}
+
+.quote p {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(30px, 5vw, 60px);
+    line-height: 1.25;
+    margin: 30px 0;
+}
+
+.quote small {
+    color: rgba(245,239,229,.55);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* ---------- INTERACTIVE ---------- */
+
+.interactive {
+    text-align: center;
+}
+
+.secret-box {
+    max-width: 700px;
+    margin: 55px auto 0;
+    border: 1px solid var(--line);
+    padding: 55px 35px;
+    background: var(--paper);
+}
+
+.secret-text {
+    font-family: "Playfair Display", serif;
+    font-size: 28px;
+    line-height: 1.5;
+    min-height: 80px;
+}
+
+.secret-button {
+    margin-top: 30px;
+    background: var(--wine);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    padding: 15px 30px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: .3s;
+}
+
+.secret-button:hover {
+    background: var(--wine-dark);
+    transform: translateY(-2px);
+}
+
+/* ---------- MESSAGE ---------- */
+
+.message-section {
+    background: #e9dfd1;
+}
+
+.message-layout {
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    gap: 80px;
+    align-items: start;
+}
+
+.message-info p {
+    color: var(--muted);
+    line-height: 1.9;
+    max-width: 420px;
+}
+
+.message-form {
+    background: var(--paper);
+    padding: 40px;
+    box-shadow: var(--shadow);
+}
+
+.field {
+    margin-bottom: 18px;
+}
+
+.field label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.field input,
+.field textarea {
+    width: 100%;
+    padding: 15px 0;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+    outline: none;
+    font-family: inherit;
+    color: var(--ink);
+    font-size: 15px;
+}
+
+.field input:focus,
+.field textarea:focus {
+    border-color: var(--wine);
+}
+
+.field textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.send {
+    width: 100%;
+    margin-top: 10px;
+    padding: 16px;
+    border: none;
+    background: var(--wine);
+    color: white;
+    font-family: inherit;
+    cursor: pointer;
+    transition: .3s;
+}  
+ .send:hover {
+    background: var(--wine-dark);
+}
+
+.send:disabled {
+    opacity: .55;
+    cursor: wait;
+}
+
+.form-status {
+    text-align: center;
+    font-size: 13px;
+    margin-top: 18px;
+    min-height: 20px;
+}
+
+.success {
+    color: #486347;
+}
+
+.error {
+    color: #913f3f;
+}
+
+/* ---------- FOOTER ---------- */
 
 footer {
-    position: relative;
-    z-index: 1;
+    padding: 70px 7vw;
     text-align: center;
-    padding: 60px 20px;
-    color: #5f5f70;
-    font-size: 13px;
+    background: var(--paper);
 }
 
-/* Телефон */
+.footer-name {
+    font-family: "Playfair Display", serif;
+    font-size: 42px;
+}
 
-@media (max-width: 700px) {
+footer p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+/* ---------- ANIMATION ---------- */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity .9s ease, transform .9s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 750px) {
 
     nav {
-        padding: 18px 5%;
+        padding: 20px 6vw;
     }
 
-    h1 {
-        letter-spacing: -3px;
+    .nav-right {
+        display: none;
     }
 
-    .subtitle {
-        font-size: 16px;
+    section {
+        padding: 90px 6vw;
     }
 
-    .cards {
+    .hero {
+        padding-left: 6vw;
+        padding-right: 6vw;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .letter-grid,
+    .message-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .words {
         grid-template-columns: 1fr;
     }
 
-    .card {
-        min-height: auto;
+    .message-form {
+        padding: 28px 22px;
     }
 
-    .message-box {
-        padding: 22px;
+    .letter {
+        padding: 35px 25px;
     }
 
-    .section {
-        padding: 75px 0;
+    .secret-box {
+        padding: 40px 22px;
+    }
+
+    .secret-text {
+        font-size: 24px;
     }
 }
 </style>
@@ -427,934 +585,629 @@ footer {
 
 <body>
 
-<div class="bg">
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-</div>
-<nav>
-    <div class="logo">FOR <span>YOU</span></div>
+<!-- INTRO -->
 
-    <a href="#message" class="nav-btn">
-        Написать
-    </a>
+<div class="intro" id="intro">
+
+    <div class="intro-inner">
+
+        <div class="intro-small">
+            a small place
+        </div>
+
+        <h1>Акылай</h1>
+
+        <div class="intro-line"></div>
+
+        <button onclick="openSite()">
+            Открыть
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- NAV -->
+
+<nav>
+
+    <div class="logo">
+        А.
+    </div>
+
+    <div class="nav-right">
+        специально для тебя
+    </div>
+
 </nav>
 
-<section class="hero">
 
-    <div class="hero-content">
+<!-- HERO -->
 
-        <div class="badge">
-            маленькое особенное место
+<header class="hero">
+
+    <div class="hero-content reveal">
+
+        <div class="eyebrow">
+            кое-что личное
         </div>
 
         <h1>
-            Акылай
+            Для тебя,<br>
+            <em>Акылай.</em>
         </h1>
 
-        <p class="subtitle">
-            Иногда хочется оставить несколько слов
-            в месте, которое создано только для них.
+        <p class="hero-sub">
+            Не знаю, насколько правильно говорить всё это
+            словами, поэтому решил оставить тебе целую
+            маленькую страницу.
         </p>
 
-        <a href="#message" class="main-btn">
-            Оставить сообщение ↓
-        </a>
+        <div class="scroll">
+            листай ниже
+            <span></span>
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- LETTER -->
+
+<section class="letter-section">
+
+    <div class="section-inner">
+
+        <div class="letter-grid">
+
+            <div class="reveal">
+
+                <div class="section-label">
+                    01 — письмо
+                </div>
+
+                <h2 class="section-title">
+                    Несколько<br>
+                    слов.
+                </h2>
+
+                <div class="divider"></div>
+
+                <p class="letter-note">
+                    Это не какой-то идеальный текст.
+                    Просто мысли, которые хотелось
+                    собрать в одном месте.
+                </p>
+
+            </div>
+
+
+            <div class="letter reveal">
+
+                <h2>
+                    Акылай,
+                </h2>
+
+         
+
+                <p>
+                    Я не хочу превращать это в огромную
+                    драматичную историю. Мне просто хотелось
+                    сделать что-нибудь необычное именно для тебя.
+                </p>
+
+                <p>
+                    Поэтому здесь нет ничего сложного.
+                    Просто место, которое существует потому,
+                    что однажды мне захотелось сказать тебе
+                    несколько хороших слов.
+                </p>   
+                <div class="signature">
+                    — от меня
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
 </section>
 
-<section class="section">
 
-    <h2 class="section-title">
-        Небольшое пространство
-    </h2>
+<!-- WORDS -->
 
-    <p class="section-text">
-        Здесь нет ничего лишнего.
-        Только несколько деталей и возможность оставить свои слова.
-    </p>
+<section>
 
-    <div class="cards">
+    <div class="section-inner">
 
-        <div class="card">
-            <div class="card-icon">✦</div>
+        <div class="reveal">
 
-            <h3>Особенное</h3>
+            <div class="section-label">
+                02 — почему
+            </div>
 
-            <p>
-                Небольшой сайт, созданный специально
-                для одного человека.
-            </p>
+            <h2 class="section-title">
+                Что хочется<br>
+                сказать.
+            </h2>
+
         </div>
 
-        <div class="card">
-            <div class="card-icon">∞</div>
 
-            <h3>Без лишнего</h3>
+        <div class="words">
 
-            <p>
-                Никаких регистраций и сложных действий.
-                Просто открой и оставь сообщение.
-            </p>
-        </div>
+            <div class="word-card reveal">
 
-        <div class="card">
-            <div class="card-icon">♡</div>
+                <span class="word-number">01</span>
 
-            <h3>Твои слова</h3>
+                <div>
+                    <h3>Тепло</h3>
 
-            <p>
-                Напиши всё, что захочешь.
-                Сообщение отправится владельцу сайта.
-            </p>
+                    <p>
+                        Есть люди, рядом с которыми
+                        обычный день становится немного
+                        приятнее.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="word-card reveal">
+
+                <span class="word-number">02</span>
+
+                <div>
+                    <h3>Улыбка</h3>
+
+                    <p>
+                        Иногда одной улыбки человека
+                        достаточно, чтобы настроение
+                        поменялось.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="word-card reveal">
+
+                <span class="word-number">03</span>
+
+                <div>
+                    <h3>Ты</h3>
+
+                    <p>
+                        Ну а третье слово, думаю,
+                        и так понятно.
+                    </p>
+                </div>
+
+            </div>
+
         </div>
 
     </div>
 
 </section>
 
-<section class="section" id="message">
 
-    <h2 class="section-title">
-        Оставить сообщение
-    </h2>
+<!-- QUOTE -->
 
-    <p class="section-text">
-        Если захочешь что-нибудь написать —
-        оставь это здесь.
-    </p>
+<section class="quote-section">
 
-    <form class="message-box" id="messageForm">
+    <div class="quote reveal">
 
-        <div class="form-row">
+        <div class="quote-mark">
+            “
+        </div>
 
-            <label for="name">
-                сюдо пиши
-            </label>
+        <p>
+            Некоторые вещи не требуют
+            большого количества слов.
+        </p>
 
-            <input
-                type="text"
-                id="name"
-                placeholder="пиши например: как дела"
-                maxlength="60"
-                required
+        <small>
+            просто нужно сказать их вовремя
+        </small>
+
+    </div>
+
+</section>
+
+
+<!-- INTERACTIVE -->
+
+<section class="interactive">
+
+    <div class="section-inner">
+
+        <div class="reveal">
+
+            <div class="section-label">
+                03 — маленький секрет
+            </div>
+
+            <h2 class="section-title">
+                Нажми,
+                если интересно.
+            </h2>
+
+        </div>
+
+
+        <div class="secret-box reveal">
+
+            <div
+                class="secret-text"
+                id="secretText"
+            >
+                Здесь пока ничего нет...
+            </div>
+
+            <button
+                class="secret-button"
+                onclick="showSecret()"
+            >
+                Открыть
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MESSAGE -->
+
+<section class="message-section">
+
+    <div class="section-inner">
+
+        <div class="message-layout">
+
+            <div class="message-info reveal">
+
+                <div class="section-label">
+                    04 — теперь ты
+                </div>
+
+                <h2 class="section-title">
+                    А теперь<br>
+                    твоя очередь.
+                </h2>
+
+                <div class="divider"></div>
+
+                <p>
+                    Если захочешь что-нибудь сказать —
+                    можешь оставить здесь сообщение.
+                </p>
+
+                <p>
+                    Оно придёт мне лично.
+                    Никаких публичных комментариев.
+                </p>
+
+            </div>
+
+
+            <form
+                class="message-form reveal"
+                id="messageForm"
             >
 
+                <div class="field">
+
+                    <label for="personName">
+                        Имя
+                    </label>
+
+                    <input
+                        id="personName"
+                        type="text"
+                        autocomplete="off"
+                        placeholder="Как тебя записать?"
+                    >
+
+                </div>
+
+
+                <div class="field">
+                    <label for="personMessage">
+                        Сообщение
+                    </label>
+
+                    <textarea
+                        id="personMessage"
+                        placeholder="Напиши всё, что захочешь..."
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    class="send"
+                    id="sendButton"
+                    type="submit"
+                >
+                    Отправить
+                </button>
+
+
+                <div
+                    class="form-status"
+                    id="formStatus"
+                ></div>
+
+            </form>
+
         </div>
 
-        <div class="form-row">
-
-            <label for="message">
-                а сюда фигню всякую
-            </label>
-
-            <textarea
-                id="message"
-                placeholder="Напиши что-нибудь..."
-                maxlength="1000"
-                required
-            ></textarea>
-
-        </div>
-
-        <button
-            class="send-btn"
-            type="submit"
-            id="sendButton"
-        >
-            Отправить сообщение
-        </button>
-
-    </form>
+    </div>
 
 </section>
 
+
+<!-- FOOTER -->
+
 <footer>
-    Сделано с вниманием ✦
+
+    <div class="footer-name">
+        Акылай.
+    </div>
+
+    <p>
+        эта страница останется здесь.
+    </p>
+
 </footer>
 
-<div class="notification" id="notification"></div>
 
 <script>
 
-const form = document.getElementById("messageForm");
-const button = document.getElementById("sendButton");
-const notification = document.getElementById("notification");
+/* ---------- INTRO ---------- */
 
-/*
-    СЮДА ПОТОМ ПОСТАВИМ АДРЕС ТВОЕГО CLOUDFLARE WORKER
-*/
+function openSite() {
+
+    const intro =
+        document.getElementById("intro");
+
+    intro.classList.add("hide");
+
+}
+
+
+/* ---------- SECRET ---------- */
+
+const secrets = [
+
+    "Ты важнее, чем думаешь.",
+
+    "Да, эта страница действительно была сделана специально для тебя.",
+
+    "Если ты дошла до этого места — значит, всё было не зря.",
+
+    "И да... ты мне нравишься.",
+
+    "Вот теперь ты знаешь маленький секрет."
+
+];
+
+let secretIndex = 0;
+
+
+function showSecret() {
+
+    const text =
+        document.getElementById("secretText");
+
+    text.style.opacity = "0";
+
+    setTimeout(function() {
+
+        text.textContent =
+            secrets[secretIndex];
+
+        text.style.opacity = "1";
+
+        secretIndex++;
+
+        if (secretIndex >= secrets.length) {
+            secretIndex = 0;
+        }
+
+    }, 250);
+
+}
+
+
+/* ---------- REVEAL ---------- */
+
+const revealElements =
+    document.querySelectorAll(".reveal");
+
+
+const observer =
+    new IntersectionObserver(
+
+        function(entries) {
+
+            entries.forEach(function(entry) {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add(
+                        "visible"
+                    );
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.12
+        }
+
+    );
+
+
+revealElements.forEach(function(element) {
+
+    observer.observe(element);
+
+});
+
+
+/* ---------- TELEGRAM ---------- */
 
 const WORKER_URL =
     "https://friend-messages.brawlstarsforever1488.workers.dev/";
 
-function showNotification(text, type) {
 
-    notification.textContent = text;
-
-    notification.className =
-        "notification show " + type;
-
-    setTimeout(() => {
-
-        notification.className =
-            "notification";
-
-    }, 4000);
-}
+const form =
+    document.getElementById("messageForm");
 
 
-form.addEventListener("submit", async function(e) {
-
-    e.preventDefault();
-
-   const nameElement = document.getElementById("name");
-const messageElement = document.getElementById("message");
-
-const name = nameElement ? nameElement.value.trim() : "";
-const message = messageElement ? messageElement.value.trim() : "";
-
-    if (!name || !message) {
-
-        showNotification(
-            "Заполни оба поля ✦",
-            "error"
-        );
-
-        return;
-    }
-
-    button.disabled = true;
-
-    button.textContent =
-        "Отправляем...";
+const nameInput =
+    document.getElementById("personName");
 
 
-    try {
+const messageInput =
+    document.getElementById("personMessage");
 
-        const response = await fetch(
-            WORKER_URL,
-            {
-                method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                    body: JSON.stringify({
-                    name: name,
-                    message: message
-                })
+const sendButton =
+    document.getElementById("sendButton");
+
+
+const formStatus =
+    document.getElementById("formStatus");
+
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const name =
+            nameInput.value.trim();
+
+
+        const message =
+            messageInput.value.trim();
+
+
+        if (!name || !message) {
+
+            formStatus.textContent =
+                "Заполни имя и сообщение.";
+
+            formStatus.className =
+                "form-status error";
+
+            return;
+
+        }
+
+
+        sendButton.disabled = true;
+
+        sendButton.textContent =
+            "Отправляем...";
+
+
+        formStatus.textContent =
+            "";
+
+
+        try {
+
+            const response =
+                await fetch(
+
+                    WORKER_URL,
+
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify({
+
+                                name: name,
+
+                                message: message
+
+                            })
+
+                    }
+
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Worker: " +
+                    response.status
+                );
+
             }
-        );
+            formStatus.textContent =
+                "Сообщение отправлено. ✦";
+
+            formStatus.className =
+                "form-status success";
 
 
-        if (!response.ok) {
+            form.reset();
 
-            const errorText =
-                await response.text();
 
-            console.log(errorText);
+        } catch (error) {
 
-            throw new Error(
-                "Ошибка сервера: " +
-                response.status
+            console.error(
+                "Ошибка:",
+                error
             );
+
+
+            formStatus.textContent =
+                "Не удалось отправить сообщение.";
+
+            formStatus.className =
+                "form-status error";
+
+
+        } finally {
+
+            sendButton.disabled =
+                false;
+
+            sendButton.textContent =
+                "Отправить";
+
         }
 
-
-        showNotification(
-            "Сообщение отправлено ✦",
-            "success"
-        );
-
-        form.reset();
-
     }
 
-    catch(error) {
+);
 
-        console.error(error);
-
-        showNotification(
-            "Не получилось отправить сообщение",
-            "error"
-        );
-
-    }
-
-    finally {
-
-        button.disabled = false;
-
-        button.textContent =
-            "Отправить сообщение";
-    }
-
-});
-
-</script>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Для тебя ✨</title>
-
-<meta name="description" content="Небольшое особенное место">
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    min-height: 100vh;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-    background:
-        radial-gradient(circle at 20% 20%, rgba(126, 87, 255, .18), transparent 35%),
-        radial-gradient(circle at 80% 70%, rgba(255, 70, 150, .14), transparent 35%),
-        #08080d;
-    color: #fff;
-    overflow-x: hidden;
-}
-
-/* Фоновые точки */
-
-.bg {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 0;
-}
-
-.dot {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: rgba(255,255,255,.55);
-    border-radius: 50%;
-    animation: float 7s infinite ease-in-out;
-}
-
-.dot:nth-child(1) { left: 8%; top: 20%; animation-delay: 0s; }
-.dot:nth-child(2) { left: 20%; top: 70%; animation-delay: 1s; }
-.dot:nth-child(3) { left: 35%; top: 35%; animation-delay: 2s; }
-.dot:nth-child(4) { left: 52%; top: 80%; animation-delay: 3s; }
-.dot:nth-child(5) { left: 70%; top: 18%; animation-delay: 4s; }
-.dot:nth-child(6) { left: 88%; top: 60%; animation-delay: 5s; }
-.dot:nth-child(7) { left: 94%; top: 25%; animation-delay: 2s; }
-.dot:nth-child(8) { left: 45%; top: 12%; animation-delay: 4s; }
-
-@keyframes float {
-    0%,100% {
-        transform: translateY(0) scale(1);
-        opacity: .3;
-    }
-    50% {
-        transform: translateY(-30px) scale(1.8);
-        opacity: 1;
-    }
-}
-
-/* Навигация */
-
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 22px 7%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 20;
-    background: linear-gradient(
-        to bottom,
-        rgba(8,8,13,.9),
-        transparent
-    );
-    backdrop-filter: blur(8px);
-}
-
-.logo {
-    font-size: 19px;
-    font-weight: 700;
-    letter-spacing: 2px;
-}
-
-.logo span {
-    color: #c78cff;
-}
-
-.nav-btn {
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-    padding: 10px 18px;
-    border: 1px solid rgba(255,255,255,.15);
-    border-radius: 100px;
-    transition: .3s;
-}
-
-.nav-btn:hover {
-    background: rgba(255,255,255,.08);
-    border-color: rgba(255,255,255,.35);
-}
-
-/* Главный экран */
-
-.hero {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 110px 20px 70px;
-}
-
-.hero-content {
-    width: min(900px, 100%);
-    text-align: center;
-    animation: appear 1.2s ease;
-}
-
-@keyframes appear {
-    from {
-        opacity: 0;
-        transform: translateY(35px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 9px 16px;
-    border-radius: 100px;
-    border: 1px solid rgba(255,255,255,.12);
-    background: rgba(255,255,255,.04);
-    color: #cfcfe4;
-    font-size: 13px;
-    margin-bottom: 25px;
-}
-
-.badge::before {
-    content: "";
-    width: 7px;
-    height: 7px;
-    background: #b678ff;
-    border-radius: 50%;
-    box-shadow: 0 0 15px #b678ff;
-}
-
-h1 {
-    font-size: clamp(52px, 9vw, 105px);
-    line-height: .95;
-    letter-spacing: -5px;
-    margin-bottom: 28px;
-    background: linear-gradient(
-        120deg,
-        #fff,
-        #d7b8ff,
-        #ff9bd0,
-        #fff
-    );
-    background-size: 300%;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: gradient 7s ease infinite;
-}
-
-@keyframes gradient {
-    0%,100% { background-position: 0%; }
-    50% { background-position: 100%; }
-}
-
-.subtitle {
-    max-width: 600px;
-    margin: auto;
-    color: #a7a7b8;
-    font-size: 18px;
-    line-height: 1.7;
-}
-
-/* Кнопка */
-        .main-btn {
-    display: inline-flex;
-    margin-top: 40px;
-    padding: 16px 30px;
-    border-radius: 100px;
-    text-decoration: none;
-    color: white;
-    font-weight: 600;
-    background: linear-gradient(135deg, #8d55ff, #d84b9d);
-    box-shadow: 0 15px 50px rgba(151, 78, 255, .25);
-    transition: .35s;
-}
-
-.main-btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 70px rgba(151, 78, 255, .4);
-}
-
-/* Раздел */
-
-.section {
-    position: relative;
-    z-index: 1;
-    width: min(900px, 92%);
-    margin: auto;
-    padding: 100px 0;
-}
-
-.section-title {
-    text-align: center;
-    font-size: clamp(30px, 5vw, 50px);
-    margin-bottom: 15px;
-}
-
-.section-text {
-    text-align: center;
-    color: #888899;
-    line-height: 1.7;
-    margin-bottom: 45px;
-}
-
-/* Карточки */
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-}
-
-.card {
-    min-height: 190px;
-    padding: 28px;
-    border: 1px solid rgba(255,255,255,.09);
-    border-radius: 24px;
-    background: rgba(255,255,255,.035);
-    backdrop-filter: blur(15px);
-    transition: .35s;
-}
-
-.card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(190,130,255,.4);
-    background: rgba(255,255,255,.06);
-}
-
-.card-icon {
-    font-size: 28px;
-    margin-bottom: 25px;
-}
-
-.card h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.card p {
-    color: #888899;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-/* Форма */
-
-.message-box {
-    padding: 35px;
-    border-radius: 30px;
-    border: 1px solid rgba(255,255,255,.1);
-    background: rgba(255,255,255,.045);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 30px 100px rgba(0,0,0,.25);
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
-    color: #c8c8d8;
-    font-size: 14px;
-}
-
-input,
-textarea {
-    width: 100%;
-    border: 1px solid rgba(255,255,255,.1);
-    background: rgba(0,0,0,.25);
-    color: white;
-    border-radius: 16px;
-    padding: 16px;
-    outline: none;
-    font: inherit;
-    transition: .3s;
-}
-
-input:focus,
-textarea:focus {
-    border-color: #a76bff;
-    box-shadow: 0 0 0 4px rgba(167,107,255,.08);
-}
-
-textarea {
-    min-height: 150px;
-    resize: vertical;
-}
-
-.form-row {
-    margin-bottom: 22px;
-}
-
-.send-btn {
-    width: 100%;
-    border: none;
-    padding: 17px;
-    border-radius: 16px;
-    color: white;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    background: linear-gradient(135deg,#8d55ff,#d84b9d);
-    transition: .3s;
-}
-
-.send-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 40px rgba(153,75,255,.25);
-}
-
-.send-btn:disabled {
-    opacity: .6;
-    cursor: wait;
-}
-
-/* Уведомление */
-
-.notification {
-    position: fixed;
-    left: 50%;
-    bottom: 25px;
-    transform: translate(-50%, 130px);
-    width: min(430px, calc(100% - 30px));
-    padding: 18px 22px;
-    border-radius: 18px;
-    background: rgba(25,25,34,.95);
-    border: 1px solid rgba(255,255,255,.12);
-    backdrop-filter: blur(20px);
-    text-align: center;
-    z-index: 100;
-    opacity: 0;
-    transition: .4s;
-}
-
-.notification.show {
-    transform: translate(-50%, 0);
-    opacity: 1;
-}
-
-.notification.success {
-    border-color: rgba(130,255,180,.3);
-}
-
-.notification.error {
-    border-color: rgba(255,100,120,.3);
-}
-
-/* Футер */
-
-footer {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 60px 20px;
-    color: #5f5f70;
-    font-size: 13px;
-}
-
-/* Телефон */
-
-@media (max-width: 700px) {
-
-    nav {
-        padding: 18px 5%;
-    }
-
-    h1 {
-        letter-spacing: -3px;
-    }
-
-    .subtitle {
-        font-size: 16px;
-    }
-
-    .cards {
-        grid-template-columns: 1fr;
-    }
-
-    .card {
-        min-height: auto;
-    }
-
-    .message-box {
-        padding: 22px;
-    }
-
-    .section {
-        padding: 75px 0;
-    }
-}
-</style>
-</head>
-
-<body>
-
-<div class="bg">
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-</div>
-<nav>
-    <div class="logo">FOR <span>YOU</span></div>
-
-    <a href="#message" class="nav-btn">
-        Написать
-    </a>
-</nav>
-
-<section class="hero">
-
-    <div class="hero-content">
-
-        <div class="badge">
-            маленькое особенное место
-        </div>
-
-        <h1>
-            Для тебя.
-        </h1>
-
-        <p class="subtitle">
-            Иногда хочется оставить несколько слов
-            в месте, которое создано только для них.
-        </p>
-
-        <a href="#message" class="main-btn">
-            Оставить сообщение ↓
-        </a>
-
-    </div>
-
-</section>
-
-<section class="section">
-
-    <h2 class="section-title">
-        Небольшое пространство
-    </h2>
-
-    <p class="section-text">
-        Здесь нет ничего лишнего.
-        Только несколько деталей и возможность оставить свои слова.
-    </p>
-
-    <div class="cards">
-
-        <div class="card">
-            <div class="card-icon">✦</div>
-
-            <h3>Особенное</h3>
-
-            <p>
-                Небольшой сайт, созданный специально
-                для одного человека.
-            </p>
-        </div>
-
-        <div class="card">
-            <div class="card-icon">∞</div>
-
-            <h3>Без лишнего</h3>
-
-            <p>
-                Никаких регистраций и сложных действий.
-                Просто открой и оставь сообщение.
-            </p>
-        </div>
-
-        <div class="card">
-            <div class="card-icon">♡</div>
-
-            <h3>Твои слова</h3>
-
-            <p>
-                Напиши всё, что захочешь.
-                Сообщение отправится владельцу сайта.
-            </p>
-        </div>
-
-    </div>
-
-</section>
-
-<section class="section" id="message">
-
-    <h2 class="section-title">
-        Оставить сообщение
-    </h2>
-
-    <p class="section-text">
-        Если захочешь что-нибудь написать —
-        оставь это здесь.
-    </p>
-
-    <form class="message-box" id="messageForm">
-
-        <div class="form-row">
-
-            <label for="name">
-                Твоё имя
-            </label>
-
-            <input
-                type="text"
-                id="name"
-                placeholder="Как тебя зовут?"
-                maxlength="60"
-                required
-            >
-
-        </div>
-
-        <div class="form-row">
-
-            <label for="message">
-                Сообщение
-            </label>
-
-            <textarea
-                id="message"
-                placeholder="Напиши что-нибудь..."
-                maxlength="1000"
-                required
-            ></textarea>
-
-        </div>
-
-        <button
-            class="send-btn"
-            type="submit"
-            id="sendButton"
-        >
-            Отправить сообщение
-        </button>
-
-    </form>
-
-</section>
-
-<footer>
-    Сделано с вниманием ✦
-</footer>
-
-<div class="notification" id="notification"></div>
-
-<script>
-const form = document.getElementById("messageForm");
-
-const WORKER_URL =
-    "https://friend-messages.brawlstarsforever1488.workers.dev/";
-
-form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const inputs = form.querySelectorAll("input, textarea");
-
-    const name = inputs[0]?.value || "";
-    const message = inputs[1]?.value || "";
-
-    if (!name.trim() || !message.trim()) {
-        alert("Заполни оба поля ✦");
-        return;
-    }
-
-    const button = form.querySelector("button[type='submit']");
-
-    if (button) {
-        button.disabled = true;
-        button.textContent = "Отправляем...";
-    }
-
-    try {
-        console.log("Отправляем сообщение...");
-        console.log("Worker:", WORKER_URL);
-
-        const response = await fetch(WORKER_URL, {
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-                name: name,
-                message: message
-            })
-        });
-
-        console.log("Worker response:", response.status);
-
-        if (!response.ok) {
-            throw new Error("Worker returned " + response.status);
-        }
-
-        alert("Сообщение отправлено ✦");
-
-        form.reset();
-
-    } catch (error) {
-        console.error("Ошибка отправки:", error);
-
-        alert(
-            "Не удалось отправить сообщение.\n\n" +
-            "Ошибка: " + error.message
-        );
-
-    } finally {
-        if (button) {
-            button.disabled = false;
-            button.textContent = "Отправить сообщение";
-        }
-    }
-});
 </script>
 
 </body>
